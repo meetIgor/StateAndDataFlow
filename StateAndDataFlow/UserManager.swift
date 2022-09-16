@@ -10,7 +10,7 @@ import SwiftUI
 
 class UserManager: ObservableObject {
     
-    @AppStorage("username") var name = ""
+    @Published var name = ""
     
     var isRegister: Bool {
         !name.isEmpty

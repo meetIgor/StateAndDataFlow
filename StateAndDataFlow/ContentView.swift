@@ -32,7 +32,7 @@ struct ContentView: View {
             Spacer()
             
             ButtonView(
-                action: { user.name = "" },
+                action: { StorageManager.shared.delete(user) },
                 title: "Log Out",
                 color: .blue
             )
