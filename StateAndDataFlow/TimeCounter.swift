@@ -28,13 +28,7 @@ class TimeCounter: ObservableObject {
     }
     
     @objc private func updateCounter() {
-        if counter > 0 {
-            counter -= 1
-        } else {
-            killTimer()
-            buttonTitle = "Reset"
-        }
-        //counter > 0 ? counter -= 1 : killTimer()
+        counter > 0 ? counter -= 1 : killTimer()
         objectWillChange.send(self)
     }
     

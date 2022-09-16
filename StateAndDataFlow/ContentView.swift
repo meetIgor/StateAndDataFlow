@@ -25,7 +25,7 @@ struct ContentView: View {
             
             ButtonView(
                 action: { timer.startTimer() },
-                title: "Start",
+                title: timer.buttonTitle,
                 color: .red
             )
             
