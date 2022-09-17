@@ -36,7 +36,8 @@ struct RegisterView: View {
     
     private func registerUser() {
         if !name.isEmpty {
-            user.name = name
+            user.user.name = name
+            user.user.isRegister = true
             StorageManager.shared.save(user)
         }
     }

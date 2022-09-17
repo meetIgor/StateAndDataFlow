@@ -11,24 +11,25 @@ class StorageManager: ObservableObject {
     static let shared = StorageManager()
     
     private let storage = UserDefaults.standard
-    private let nameKey = "username"
+    private let key = "user"
     
     private init() {}
     
     func save(_ user: UserManager) {
-        storage.set(user.name, forKey: nameKey)
+        guard let data = try? JSONEncoder().encode(user.user) else { return }
+        storage.set(data, forKey: key)
     }
     
-    func fetch() -> UserManager {
-        let user = UserManager()
-        if let username = storage.string(forKey: nameKey) {
-            user.name = username
-        }
-        return user
+    func get() -> UserManager {
+        guard let data = storage.data(forKey: key) else { return UserManager() }
+        guard let user = try? JSONDecoder().decode(User.self, from: data) else { return UserManager() }
+        return UserManager(user)
     }
     
     func delete(_ user: UserManager) {
-        user.name = ""
-        storage.removeObject(forKey: nameKey)
+        user.user.isRegister = false
+        user.user.name = ""
+        storage.removeObject(forKey: key)
     }
+
 }

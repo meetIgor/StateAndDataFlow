@@ -9,10 +9,17 @@ import Foundation
 
 class UserManager: ObservableObject {
     
-    @Published var name = ""
+    @Published var user = User()
     
-    var isRegister: Bool {
-        !name.isEmpty
+    init() {}
+    
+    init(_ user: User) {
+        self.user = user
     }
     
+}
+
+struct User: Codable {
+    var name = ""
+    var isRegister = false
 }
