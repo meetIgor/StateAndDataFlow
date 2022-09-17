@@ -32,7 +32,10 @@ struct ContentView: View {
             Spacer()
             
             ButtonView(
-                action: { user.name = ""; user.isRegister = false },
+                action: {
+                    user.name = ""
+                    user.isRegister = false
+                },
                 title: "Log Out",
                 color: .blue
             )
