@@ -10,11 +10,11 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject private var timer = TimeCounter()
-    @EnvironmentObject private var user: UserManager
+    @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
         VStack {
-            Text("Hi, \(user.name)")
+            Text("Hi, \(userManager.user.name)")
                 .font(.largeTitle)
                 .padding(.top, 100)
             Text(timer.counter.formatted())
@@ -23,22 +23,15 @@ struct ContentView: View {
             
             Spacer()
             
-            ButtonView(
-                action: { timer.startTimer() },
-                title: timer.buttonTitle,
-                color: .red
-            )
+            ButtonView(title: timer.buttonTitle, color: .red) {
+                timer.startTimer()
+            }
             
             Spacer()
             
-            ButtonView(
-                action: {
-                    user.name = ""
-                    user.isRegister = false
-                },
-                title: "Log Out",
-                color: .blue
-            )
+            ButtonView(title: "Log Out", color: .blue) {
+                StorageManager.shared.clear(userManager: userManager)
+            }
         }
         .padding()
     }
